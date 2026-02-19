@@ -121,9 +121,9 @@ body {
     <div class="value" id="model">--</div>
   </div>
 
-  <button class="status" id="status" onclick="goToTest()">
-    READY FOR ELECTRICAL TEST
-  </button>
+  <a id="testLink" class="status">
+  READY FOR ELECTRICAL TEST
+  </a>
 
   <div class="footer">
     Automated Industrial Identification System
@@ -149,7 +149,7 @@ const cabinDB = {
 };
 function goToTest() {
   const cabinId = document.getElementById("cabin").innerText;
-  window.location.href = "test.html?cabin=" + cabinId;
+  document.getElementById("testLink").href = "test.html?cabin=" + cabinId;
 }
 const params = new URLSearchParams(window.location.search);
 const cabinId = params.get("cabin");
