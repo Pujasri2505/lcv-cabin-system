@@ -147,17 +147,14 @@ const cabinDB = {
   "TSRS800212": "PARTNER NON A/C BS3", 
   "TRRS702698": "BADA DOST EV"
 };
-  
+
 const params = new URLSearchParams(window.location.search);
 const cabinId = params.get("cabin");
 
 document.getElementById("cabin").innerText =
   cabinId || "INVALID SCAN";
-
 document.getElementById("model").innerText =
   cabinDB[cabinId] || "MODEL NOT FOUND";
 </script>
-
 </body>
 </html>
-
