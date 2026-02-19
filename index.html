@@ -86,6 +86,385 @@ button{
 const cabinDB={
   "TRRS904929":{model:"DOST A/C",type:"For A/C Models"},
   "TSRS901733":{model:"DOST NON A/C",type:""},
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LCV Cabin Identification</title>
+
+<style>
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  font-family:Segoe UI,sans-serif
+}
+.panel{
+  background:#fff;
+  width:420px;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 25px 45px rgba(0,0,0,.35)
+}
+.header{text-align:center;margin-bottom:20px}
+.header h1{color:#0a3d62}
+.data{
+  margin:12px 0;
+  padding:12px;
+  border-left:5px solid #f39c12;
+  background:#f8fafc;
+  border-radius:8px
+}
+.label{font-size:13px;color:#555}
+.value{font-size:18px;font-weight:700}
+#status{
+  margin-top:20px;
+  padding:14px;
+  background:#16a34a;
+  color:#fff;
+  text-align:center;
+  border-radius:12px;
+  cursor:pointer;
+  user-select:none
+}
+button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#0a3d62;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer
+}
+.hidden{display:none}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+  <div class="header">
+    <h1>LCV Cabin Identification</h1>
+    <p>Electrical Testing Station</p>
+  </div>
+
+  <div class="data">
+    <div class="label">Cabin Number</div>
+    <div class="value" id="cabin">--</div>
+  </div>
+
+  <div class="data">
+    <div class="label">Vehicle Model</div>
+    <div class="value" id="model">--</div>
+  </div>
+
+  <div id="paramSection"></div>
+
+  <div id="status">READY FOR ELECTRICAL TEST</div>
+
+  <button id="backBtn" class="hidden">BACK</button>
+</div>
+
+<script>
+const cabinDB={
+  "TRRS904929":{model:"DOST A/C",type:"For A/C Models"},
+  "TSRS901733":{model:"DOST NON A/C",type:""},
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LCV Cabin Identification</title>
+
+<style>
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  font-family:Segoe UI,sans-serif
+}
+.panel{
+  background:#fff;
+  width:420px;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 25px 45px rgba(0,0,0,.35)
+}
+.header{text-align:center;margin-bottom:20px}
+.header h1{color:#0a3d62}
+.data{
+  margin:12px 0;
+  padding:12px;
+  border-left:5px solid #f39c12;
+  background:#f8fafc;
+  border-radius:8px
+}
+.label{font-size:13px;color:#555}
+.value{font-size:18px;font-weight:700}
+#status{
+  margin-top:20px;
+  padding:14px;
+  background:#16a34a;
+  color:#fff;
+  text-align:center;
+  border-radius:12px;
+  cursor:pointer;
+  user-select:none
+}
+button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#0a3d62;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer
+}
+.hidden{display:none}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+  <div class="header">
+    <h1>LCV Cabin Identification</h1>
+    <p>Electrical Testing Station</p>
+  </div>
+
+  <div class="data">
+    <div class="label">Cabin Number</div>
+    <div class="value" id="cabin">--</div>
+  </div>
+
+  <div class="data">
+    <div class="label">Vehicle Model</div>
+    <div class="value" id="model">--</div>
+  </div>
+
+  <div id="paramSection"></div>
+
+  <div id="status">READY FOR ELECTRICAL TEST</div>
+
+  <button id="backBtn" class="hidden">BACK</button>
+</div>
+
+<script>
+const cabinDB={
+  "TRRS904929":{model:"DOST A/C",type:"For A/C Models"},
+  "TSRS901733":{model:"DOST NON A/C",type:""},
+  "TRRS702501":{model:"BADA DOST A/C LX",type:"For A/C Models"},
+  "TRRS702571":{model:"BADA DOST NON A/C LS",type:""},
+  "TRRS904507":{model:"SAATHI A/C",type:"For A/C Models"},
+  "TRRS904342":{model:"SAATHI NON A/C",type:""},
+  "TRRS904658":{model:"DOST EV",type:""},
+  "TRRS702453":{model:"BADA DOST I5 LX A/C",type:"For A/C Models"},
+  "TRRS702721":{model:"BADA DOST I5 NON A/C",type:""},
+  "TRRS702320":{model:"BADA DOST CNG",type:""},
+  "SCRS718973":{model:"BADA DOST 3.8T BLOWER",type:"For A/C Models"},
+  "TRRS800238":{model:"PARTNER A/C BS6",type:"For A/C Models"},
+  "TRRS800212":{model:"PARTNER NON A/C BS3",type:""},
+  "TRRS702698":{model:"BADA DOST EV",type:""},
+};
+
+const commonParams=[
+"Ignition Switch",
+"Parking & Roof Marker",
+"Head Lamp Low Beam",
+"Head Lamp High Beam",
+"Head Lamp Pass",
+"Indicator LH",
+"Indicator RH",
+"Windscreen Washer",
+"Wiper Low Speed",
+"Wiper High Speed",
+"Hazard Switch",
+"Interior Lamp",
+"DPF Switch"
+];
+
+const modelExtraParams={
+"For A/C Models":[
+"Blower 1",
+"Blower 2",
+"Blower 3",
+"Blower 4"
+]
+};
+
+const params=new URLSearchParams(window.location.search);
+const cabinId=params.get("cabin");
+
+const cabinEl=document.getElementById("cabin");
+const modelEl=document.getElementById("model");
+const paramSection=document.getElementById("paramSection");
+const statusDiv=document.getElementById("status");
+const backBtn=document.getElementById("backBtn");
+
+if(cabinId && cabinDB[cabinId]){
+  cabinEl.innerText=cabinId;
+  modelEl.innerText=cabinDB[cabinId].model;
+  loadParameters(cabinId);
+}else{
+  cabinEl.innerText="INVALID";
+  modelEl.innerText="MODEL NOT FOUND";
+}
+
+function loadParameters(id){
+  paramSection.innerHTML="";
+  let finalParams=[...commonParams];
+  const type=cabinDB[id].type;
+  if(modelExtraParams[type]){
+    finalParams=finalParams.concat(modelExtraParams[type]);
+  }
+  finalParams.forEach(p=>{
+    const d=document.createElement("div");
+    d.className="data";
+    d.innerHTML=`<div class="label">${p}</div><div class="value">--</div>`;
+    paramSection.appendChild(d);
+  });
+}
+
+statusDiv.addEventListener("click",()=>{
+  if(!(cabinId && cabinDB[cabinId])){
+    alert("Invalid cabin. Scan barcode again.");
+    return;
+  }
+  statusDiv.innerText="ELECTRICAL TEST IN PROGRESS";
+  statusDiv.style.cursor="not-allowed";
+  startTesting();
+});
+
+function startTesting(){
+  const values=document.querySelectorAll(".value");
+  let i=0;
+  const timer=setInterval(()=>{
+    if(i>=values.length){
+      clearInterval(timer);
+      statusDiv.innerText="TEST COMPLETED";
+      backBtn.classList.remove("hidden");
+      return;
+    }
+    const pass=Math.random()>0.2;
+    values[i].innerText=pass?"OK":"NOT OK";
+    values[i].style.color=pass?"#16a34a":"#dc2626";
+    i++;
+  },600);
+}
+
+backBtn.addEventListener("click",()=>{
+  window.history.back();
+});
+</script>
+
+</body>
+</html>
+
+  "SCRS718973":{model:"BADA DOST BLOWER",type:"For A/C Models"}
+};
+
+const commonParams=[
+"Ignition Switch",
+"Parking & Roof Marker",
+"Head Lamp Low Beam",
+"Head Lamp High Beam",
+"Head Lamp Pass",
+"Indicator LH",
+"Indicator RH",
+"Windscreen Washer",
+"Wiper Low Speed",
+"Wiper High Speed",
+"Hazard Switch",
+"Interior Lamp",
+"DPF Switch"
+];
+
+const modelExtraParams={
+"For A/C Models":[
+"Blower 1",
+"Blower 2",
+"Blower 3",
+"Blower 4"
+]
+};
+
+const params=new URLSearchParams(window.location.search);
+const cabinId=params.get("cabin");
+
+const cabinEl=document.getElementById("cabin");
+const modelEl=document.getElementById("model");
+const paramSection=document.getElementById("paramSection");
+const statusDiv=document.getElementById("status");
+const backBtn=document.getElementById("backBtn");
+
+if(cabinId && cabinDB[cabinId]){
+  cabinEl.innerText=cabinId;
+  modelEl.innerText=cabinDB[cabinId].model;
+  loadParameters(cabinId);
+}else{
+  cabinEl.innerText="INVALID";
+  modelEl.innerText="MODEL NOT FOUND";
+}
+
+function loadParameters(id){
+  paramSection.innerHTML="";
+  let finalParams=[...commonParams];
+  const type=cabinDB[id].type;
+  if(modelExtraParams[type]){
+    finalParams=finalParams.concat(modelExtraParams[type]);
+  }
+  finalParams.forEach(p=>{
+    const d=document.createElement("div");
+    d.className="data";
+    d.innerHTML=`<div class="label">${p}</div><div class="value">--</div>`;
+    paramSection.appendChild(d);
+  });
+}
+
+statusDiv.addEventListener("click",()=>{
+  if(!(cabinId && cabinDB[cabinId])){
+    alert("Invalid cabin. Scan barcode again.");
+    return;
+  }
+  statusDiv.innerText="ELECTRICAL TEST IN PROGRESS";
+  statusDiv.style.cursor="not-allowed";
+  startTesting();
+});
+
+function startTesting(){
+  const values=document.querySelectorAll(".value");
+  let i=0;
+  const timer=setInterval(()=>{
+    if(i>=values.length){
+      clearInterval(timer);
+      statusDiv.innerText="TEST COMPLETED";
+      backBtn.classList.remove("hidden");
+      return;
+    }
+    const pass=Math.random()>0.2;
+    values[i].innerText=pass?"OK":"NOT OK";
+    values[i].style.color=pass?"#16a34a":"#dc2626";
+    i++;
+  },600);
+}
+
+backBtn.addEventListener("click",()=>{
+  window.history.back();
+});
+</script>
+
+</body>
+</html>
+
   "SCRS718973":{model:"BADA DOST BLOWER",type:"For A/C Models"}
 };
 
@@ -180,3 +559,4 @@ backBtn.addEventListener("click",()=>{
 </script>
 </body>
 </html>
+
