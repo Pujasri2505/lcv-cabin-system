@@ -14,7 +14,7 @@
   --success: #16a34a;
 }
 
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -147,10 +147,7 @@ const cabinDB = {
   "TSRS800212": "PARTNER NON A/C BS3", 
   "TRRS702698": "BADA DOST EV"
 };
-function goToTest() {
-  const cabinId = document.getElementById("cabin").innerText;
-  document.getElementById("testLink").href = "test.html?cabin=" + cabinId;
-}
+
 const params = new URLSearchParams(window.location.search);
 const cabinId = params.get("cabin");
 
