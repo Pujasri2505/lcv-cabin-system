@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LCV Cabin Identification</title>
+
+<style>
+:root {
+  --primary: #0a3d62;
+  --accent: #f39c12;
+  --bg: #0f172a;
+  --card: #ffffff;
+  --success: #16a34a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel {
+  background: var(--card);
+  width: 420px;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 25px 45px rgba(0,0,0,0.35);
+  animation: slideUp 0.9s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.header h1 {
+  font-size: 26px;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+
+.header p {
+  font-size: 13px;
+  color: #666;
+}
+
+.data {
+  margin: 18px 0;
+  padding: 15px;
+  border-left: 5px solid var(--accent);
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+.label {
+  font-size: 14px;
+  color: #555;
+}
+
+.value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+}
+
+.status {
+  margin-top: 30px;
+  text-align: center;
+  padding: 14px;
+  background: var(--success);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 12px;
+  letter-spacing: 1px;
+}
+
+.footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+  <div class="header">
+    <h1>LCV Cabin Identification</h1>
+    <p>Electrical Testing Station</p>
+  </div>
+
+  <div class="data">
+    <div class="label">Cabin Number</div>
+    <div class="value" id="cabin">--</div>
+  </div>
+
+  <div class="data">
+    <div class="label">Vehicle Model</div>
+    <div class="value" id="model">--</div>
+  </div>
+
+  <div class="status" id="status">
+    READY FOR ELECTRICAL TEST
+  </div>
+
+  <div class="footer">
+    Automated Industrial Identification System
+  </div>
+</div>
+
+<script>
+/* 🔧 Local Industry Database (No backend) */
+const cabinDB = {
+  "TRRS904929": "DOST A/C",
+  "TSRS901733": "DOST NON A/C",
+  "TRRS702501": "BADA DOST A/C LX",
+  "TRRS702571": "BADA DOST NON A/C LS",
+  "TRRS904501": "SAATHI A/C",
+  "TRRS904342": "SAATHI NON A/C",
+  "TRRS904658": "DOST EV",
+  "TRRS702453": "BADA DOST I5 A/C LX",
+  "TRRS702721": "BADA DOST I5 NON A/C",
+  "TRRS702320": "BADA DOST CNG",
+  "SCRS718973": "BADA DOST 3.8T BLOWER",
+  "TRRS800238": "PARTNER A/C BS6",
+  "TSRS800212": "PARTNER NON A/C BS3",
+  "TRRS702698": "BADA DOST EV"
+};
+
+const params = new URLSearchParams(window.location.search);
+const cabinId = params.get("cabin");
+
+document.getElementById("cabin").innerText =
+  cabinId || "INVALID SCAN";
+
+document.getElementById("model").innerText =
+  cabinDB[cabinId] || "MODEL NOT FOUND";
+</script>
+
+</body>
+</html>
