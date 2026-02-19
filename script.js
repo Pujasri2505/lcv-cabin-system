@@ -9,3 +9,26 @@ statusDiv.style.opacity = "0.85";
 alert("Invalid cabin. Scan barcode again.");
 }
 });
+const commonParams = [
+  "Ignition Switch",
+  "Parking & Roof Marker",
+  "Head Lamp Low Beam",
+  "Head Lamp High Beam",
+  "Head Lamp Pass",
+  "Indicator LH",
+  "Indicator RH",
+  "Windscreen Washer",
+  "Wiper Low Speed",
+  "Wiper High Speed",
+  "Hazard Switch",
+  "Interior Lamp",
+  "DPF Switch"
+];
+const modelExtraParams = {
+  "For A/C Models": [
+    "Blower 1",
+    "Blower 2",
+    "Blower 3",
+    "Blower 4"
+  ]
+};
