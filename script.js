@@ -1,5 +1,10 @@
 const statusDiv = document.getElementById("status");
-
+.status {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
 statusDiv.addEventListener("click", () => {
 if (cabinId && cabinDB[cabinId]) {
 statusDiv.innerText = "✔ ELECTRICAL TEST IN PROGRESS";
