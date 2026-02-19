@@ -121,7 +121,7 @@ body {
     <div class="value" id="model">--</div>
   </div>
 
-  <button class="status" id="status">
+  <button class="status" id="status" onclick="goToTest()">
     READY FOR ELECTRICAL TEST
   </button>
 
@@ -147,7 +147,10 @@ const cabinDB = {
   "TSRS800212": "PARTNER NON A/C BS3", 
   "TRRS702698": "BADA DOST EV"
 };
-
+function goToTest() {
+  const cabinId = document.getElementById("cabin").innerText;
+  window.location.href = "test.html?cabin=" + cabinId;
+}
 const params = new URLSearchParams(window.location.search);
 const cabinId = params.get("cabin");
 
