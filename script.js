@@ -1,3 +1,5 @@
+window.addEventListener("DOMContentLoaded", () => {
+
 const cabinEl = document.getElementById("cabin");
 const modelEl = document.getElementById("model");
 const testButton = document.getElementById("testBtn");
@@ -20,4 +22,5 @@ testButton.disabled = true;
 } else {
 alert("Invalid cabin. Scan barcode again.");
 }
+});
 });
