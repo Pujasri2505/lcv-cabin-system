@@ -148,7 +148,20 @@ const cabinDB = {
   "TSRS800212": "PARTNER NON A/C BS3",
   "TRRS702698": "BADA DOST EV"
 };
+<script>
+const statusBtn = document.getElementById("status");
 
+statusBtn.addEventListener("click", () => {
+  if (cabinId && cabinDB[cabinId]) {
+    statusBtn.innerText = "TEST IN PROGRESS";
+    statusBtn.style.background = "#0ea5e9";
+    statusBtn.disabled = true;
+  } else {
+    alert("Invalid cabin. Scan barcode again.");
+  }
+});
+</script>
+<script>
 const params = new URLSearchParams(window.location.search);
 const cabinId = params.get("cabin");
 
