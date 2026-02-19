@@ -6,101 +6,54 @@
 <title>LCV Cabin Identification</title>
 
 <style>
-:root {
-  --primary: #0a3d62;
-  --accent: #f39c12;
-  --bg: #0f172a;
-  --card: #ffffff;
-  --success: #16a34a;
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  font-family:Segoe UI,sans-serif
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+.panel{
+  background:#fff;
+  width:420px;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 25px 45px rgba(0,0,0,.35)
 }
-
-body {
-  height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.header{text-align:center;margin-bottom:20px}
+.header h1{color:#0a3d62}
+.data{
+  margin:12px 0;
+  padding:12px;
+  border-left:5px solid #f39c12;
+  background:#f8fafc;
+  border-radius:8px
 }
-
-.panel {
-  background: var(--card);
-  width: 420px;
-  padding: 35px;
-  border-radius: 18px;
-  box-shadow: 0 25px 45px rgba(0,0,0,0.35);
-  animation: slideUp 0.9s ease;
+.label{font-size:13px;color:#555}
+.value{font-size:18px;font-weight:700}
+#status{
+  margin-top:20px;
+  padding:14px;
+  background:#16a34a;
+  color:#fff;
+  text-align:center;
+  border-radius:12px;
+  cursor:pointer;
+  user-select:none
 }
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#0a3d62;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer
 }
-
-.header {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.header h1 {
-  font-size: 26px;
-  color: var(--primary);
-  letter-spacing: 1px;
-}
-
-.header p {
-  font-size: 13px;
-  color: #666;
-}
-
-.data {
-  margin: 18px 0;
-  padding: 15px;
-  border-left: 5px solid var(--accent);
-  background: #f8fafc;
-  border-radius: 10px;
-}
-
-.label {
-  font-size: 14px;
-  color: #555;
-}
-
-.value {
-  font-size: 20px;
-  font-weight: 700;
-  color: #000;
-}
-
-.status {
-  margin-top: 30px;
-  text-align: center;
-  padding: 14px;
-  background: var(--success);
-  color: #fff;
-  font-weight: 700;
-  border-radius: 12px;
-  letter-spacing: 1px;
-}
-
-.footer {
-  margin-top: 18px;
-  text-align: center;
-  font-size: 12px;
-  color: #888;
-}
+.hidden{display:none}
 </style>
 </head>
 
@@ -122,56 +75,108 @@ body {
     <div class="value" id="model">--</div>
   </div>
 
-  <button class="status" id="status">
-    READY FOR ELECTRICAL TEST
-  </button>
+  <div id="paramSection"></div>
 
-  <div class="footer">
-    Automated Industrial Identification System
-  </div>
+  <div id="status">READY FOR ELECTRICAL TEST</div>
+
+  <button id="backBtn" class="hidden">BACK</button>
 </div>
 
 <script>
-const cabinDB = {
-  "TRRS904929": "DOST A/C",
-  "TSRS901733": "DOST NON A/C",
-  "TRRS702501": "BADA DOST A/C LX",
-  "TRRS702571": "BADA DOST NON A/C LS",
-  "TRRS904501": "SAATHI A/C",
-  "TRRS904342": "SAATHI NON A/C",
-  "TRRS904658": "DOST EV",
-  "TRRS702453": "BADA DOST I5 A/C LX",
-  "TRRS702721": "BADA DOST I5 NON A/C",
-  "TRRS702320": "BADA DOST CNG",
-  "SCRS718973": "BADA DOST 3.8T BLOWER",
-  "TRRS800238": "PARTNER A/C BS6",
-  "TSRS800212": "PARTNER NON A/C BS3",
-  "TRRS702698": "BADA DOST EV"
+const cabinDB={
+  "TRRS904929":{model:"DOST A/C",type:"For A/C Models"},
+  "TSRS901733":{model:"DOST NON A/C",type:""},
+  "SCRS718973":{model:"BADA DOST BLOWER",type:"For A/C Models"}
 };
-<script>
-const statusBtn = document.getElementById("status");
 
-statusBtn.addEventListener("click", () => {
-  if (cabinId && cabinDB[cabinId]) {
-    statusBtn.innerText = "TEST IN PROGRESS";
-    statusBtn.style.background = "#0ea5e9";
-    statusBtn.disabled = true;
-  } else {
-    alert("Invalid cabin. Scan barcode again.");
+const commonParams=[
+"Ignition Switch",
+"Parking & Roof Marker",
+"Head Lamp Low Beam",
+"Head Lamp High Beam",
+"Head Lamp Pass",
+"Indicator LH",
+"Indicator RH",
+"Windscreen Washer",
+"Wiper Low Speed",
+"Wiper High Speed",
+"Hazard Switch",
+"Interior Lamp",
+"DPF Switch"
+];
+
+const modelExtraParams={
+"For A/C Models":[
+"Blower 1",
+"Blower 2",
+"Blower 3",
+"Blower 4"
+]
+};
+
+const params=new URLSearchParams(window.location.search);
+const cabinId=params.get("cabin");
+
+const cabinEl=document.getElementById("cabin");
+const modelEl=document.getElementById("model");
+const paramSection=document.getElementById("paramSection");
+const statusDiv=document.getElementById("status");
+const backBtn=document.getElementById("backBtn");
+
+if(cabinId && cabinDB[cabinId]){
+  cabinEl.innerText=cabinId;
+  modelEl.innerText=cabinDB[cabinId].model;
+  loadParameters(cabinId);
+}else{
+  cabinEl.innerText="INVALID";
+  modelEl.innerText="MODEL NOT FOUND";
+}
+
+function loadParameters(id){
+  paramSection.innerHTML="";
+  let finalParams=[...commonParams];
+  const type=cabinDB[id].type;
+  if(modelExtraParams[type]){
+    finalParams=finalParams.concat(modelExtraParams[type]);
   }
+  finalParams.forEach(p=>{
+    const d=document.createElement("div");
+    d.className="data";
+    d.innerHTML=`<div class="label">${p}</div><div class="value">--</div>`;
+    paramSection.appendChild(d);
+  });
+}
+
+statusDiv.addEventListener("click",()=>{
+  if(!(cabinId && cabinDB[cabinId])){
+    alert("Invalid cabin. Scan barcode again.");
+    return;
+  }
+  statusDiv.innerText="ELECTRICAL TEST IN PROGRESS";
+  statusDiv.style.cursor="not-allowed";
+  startTesting();
+});
+
+function startTesting(){
+  const values=document.querySelectorAll(".value");
+  let i=0;
+  const timer=setInterval(()=>{
+    if(i>=values.length){
+      clearInterval(timer);
+      statusDiv.innerText="TEST COMPLETED";
+      backBtn.classList.remove("hidden");
+      return;
+    }
+    const pass=Math.random()>0.2;
+    values[i].innerText=pass?"OK":"NOT OK";
+    values[i].style.color=pass?"#16a34a":"#dc2626";
+    i++;
+  },600);
+}
+
+backBtn.addEventListener("click",()=>{
+  window.history.back();
 });
 </script>
-<script>
-const params = new URLSearchParams(window.location.search);
-const cabinId = params.get("cabin");
-
-document.getElementById("cabin").innerText =
-  cabinId || "INVALID SCAN";
-
-document.getElementById("model").innerText =
-  cabinDB[cabinId] || "MODEL NOT FOUND";
-</script>
-
 </body>
-
 </html>
