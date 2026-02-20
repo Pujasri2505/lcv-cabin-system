@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Electrical Test Parameters</title>
+<title>Electrical Test</title>
 
 <style>
 body {
@@ -14,7 +14,6 @@ body {
   align-items: center;
   height: 100vh;
 }
-
 .panel {
   background: #fff;
   width: 520px;
@@ -22,20 +21,17 @@ body {
   border-radius: 18px;
   box-shadow: 0 25px 45px rgba(0,0,0,0.35);
 }
-
 h2 {
   text-align: center;
   color: #002b5c;
   margin-bottom: 8px;
 }
-
 .info {
   text-align: center;
   font-size: 14px;
   color: #555;
   margin-bottom: 20px;
 }
-
 .param {
   display: flex;
   justify-content: space-between;
@@ -45,10 +41,8 @@ h2 {
   border-radius: 8px;
   font-size: 14px;
 }
-
 .ok { color: green; font-weight: 700; }
 .notok { color: red; font-weight: 700; }
-
 button {
   width: 100%;
   padding: 12px;
@@ -59,7 +53,6 @@ button {
   font-weight: 700;
   cursor: pointer;
 }
-
 .start { background: #16a34a; color: #fff; }
 .back  { background: #002b5c; color: #fff; }
 </style>
@@ -67,7 +60,6 @@ button {
 
 <body>
 <div class="panel">
-
   <h2>Electrical Test</h2>
   <div class="info">
     Cabin: <span id="cabin">--</span><br>
@@ -122,9 +114,17 @@ const params = new URLSearchParams(window.location.search);
 const cabinId = params.get("cabin");
 const model = cabinDB[cabinId] || "UNKNOWN MODEL";
 
-document.getElementById("cabin").innerText = cabinId;
-document.getElementById("model").innerText = model;
+const cabinId = params.get("cabin");
 
+if (!cabinId) {
+  document.getElementById("cabin").innerText = "INVALID SCAN";
+  document.getElementById("model").innerText = "MODEL NOT FOUND";
+} else {
+  document.getElementById("cabin").innerText = cabinId;
+  document.getElementById("model").innerText =
+    cabinDB[cabinId] || "MODEL NOT FOUND";
+}
+  
 let testParams = [...baseParams];
 
 if (model.includes("A/C")) {
