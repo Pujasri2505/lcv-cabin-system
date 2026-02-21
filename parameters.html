@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Electrical Test</title>
+<style>
+body{
+  background: linear-gradient(135deg,#0f172a,#1e293b);
+  font-family: Segoe UI;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.panel{
+  background:#fff;
+  width:520px;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 25px 45px rgba(0,0,0,0.35);
+}
+h2{
+  text-align:center;
+  color:#002b5c;
+}
+.info{
+  text-align:center;
+  margin-bottom:20px;
+}
+.param{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 12px;
+  margin-bottom:6px;
+  background:#f1f5f9;
+  border-radius:6px;
+}
+.ok{color:green;font-weight:bold;}
+button{
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  border:none;
+  border-radius:10px;
+  background:#16a34a;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="panel">
+  <h2>Electrical Test</h2>
+  <div class="info">
+    Cabin: <span id="cabin">TRRS904658</span><br>
+    Model: <span id="model">DOST EV</span>
+  </div>
+
+  <div id="testArea"></div>
+
+  <button onclick="startTest()">START TEST</button>
+</div>
+
+<script>
+const parameters = [
+"Ignition Switch Function",
+"Parking & Roof Marker Function",
+"Head Lamp Low Beam Function",
+"Head Lamp High Beam Function",
+"Head Lamp Pass Function",
+"Indicator LH Function",
+"Indicator RH Function",
+"Windscreen Washer Function",
+"Wiper Low Speed Function",
+"Wiper High Speed Function",
+"Hazard Switch Function",
+"Interior Lamp Function",
+"DPF Switch Function"
+];
+
+function startTest(){
+  const area = document.getElementById("testArea");
+  area.innerHTML="";
+  let allOk=true;
+
+  parameters.forEach(p=>{
+    const div=document.createElement("div");
+    div.className="param";
+    div.innerHTML=`<span>${p}</span>
+                   <span class="ok">OK</span>`;
+    area.appendChild(div);
+  });
+
+  setTimeout(()=>{
+    alert("ELECTRICALLY OK✅");
+    window.location.href="status.html";
+  },1500);
+}
+</script>
+
+</body>
+</html>
