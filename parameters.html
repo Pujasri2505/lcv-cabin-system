@@ -55,6 +55,7 @@ button{
 <div class="panel">
   <h2>Electrical Test🔌</h2>
   <button onclick="startTest()">START TEST</button>
+  <div id="testArea"></div>
 </div>
 
 <script>
@@ -76,8 +77,8 @@ const parameters = [
 
 function startTest(){
   const area = document.getElementById("testArea");
+  if(!area) return;
   area.innerHTML="";
-  let allOk=true;
 
   parameters.forEach(p=>{
     const div=document.createElement("div");
